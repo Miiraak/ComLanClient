@@ -30,19 +30,19 @@ namespace Comlan
                 if (_client.Connected)
                 {
                     _stream = _client.GetStream();
-                    AppendMessage("Connecté au serveur.");
+                    AppendMessage("Server connexion : OK.");
 
                     Thread receiveThread = new Thread(ReceiveMessages);
                     receiveThread.Start();
                 }
                 else
                 {
-                    AppendMessage("Impossible de se connecter au serveur.");
+                    AppendMessage("Impossible to join the server.");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erreur de connexion : " + ex.Message, "Comlan - Error");
+                MessageBox.Show("Connexion Error : " + ex.Message, "Comlan - Error");
                 this.Close();
             }
         }
