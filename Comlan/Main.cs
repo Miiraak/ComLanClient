@@ -73,7 +73,7 @@ namespace Comlan
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error when receiving message : " + ex.Message, "Comlan - Error");
+                    //MessageBox.Show("Error when receiving message : " + ex.Message, "Comlan - Error");
                     break;
                 }
             }
@@ -138,6 +138,26 @@ namespace Comlan
         private void ButtonAddFile_Click(object sender, EventArgs e)
         {
             // Fonction pour ajouter un fichier si nécessaire
+        }
+
+        /// <summary>
+        /// Method to close the connection and the application.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            if (_stream != null)
+            {
+                _stream.Close();
+            }
+
+            if (_client != null)
+            {
+                _client.Close();
+            }
+
+            this.Close();
         }
     }
 }
