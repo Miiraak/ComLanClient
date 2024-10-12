@@ -5,7 +5,7 @@ namespace Comlan
 {
     public partial class Main : Form
     {
-        /// <summary>
+        /// <summary>                              
         /// Required designer variable.
         /// </summary>
         private static TcpClient? _client;
