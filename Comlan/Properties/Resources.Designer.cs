@@ -63,9 +63,19 @@ namespace Comlan.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_close_24 {
+        internal static System.Drawing.Bitmap close_window {
             get {
-                object obj = ResourceManager.GetObject("icons8-close-24", resourceCulture);
+                object obj = ResourceManager.GetObject("close-window", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap minimize_window {
+            get {
+                object obj = ResourceManager.GetObject("minimize-window", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
