@@ -159,5 +159,15 @@ namespace Comlan
 
             this.Close();
         }
+
+        /// <summary>
+        /// Method to minimize the application.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonMinimize_Click(object sender, EventArgs e)
+        {
+            Main.ActiveForm.WindowState = FormWindowState.Minimized;   
+        }
     }
 }
