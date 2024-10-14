@@ -1,23 +1,22 @@
-# Comlan
+# ComLan
+
+![channel]()
 
 ## Description
-Comlan is a small portable lan communication client.
-Need to have a ComlanServer running on the network.
+ComLan is a small portable lan communication client.
+*Need to have a ComlanServer running on the network.*
 
 ## Features
-- **Custom Usernam**: Possibility to set a custom username or letting empty to use Environment.Username
+- **Custom Username**: Possibility to set a custom username or letting empty to use Environment.Username
+- **Encrypted communication**: Encrypted communication with Aes-256-Cbc. Use a default key. This can be change at login.
+- ...
 
 ### Features in development
 |||
 |---|---|
-| **Enrypted communication** | To secure the communication between users. | 
+| **Secure communication** | To secure the communication between users. | 
 | **Sending files** | Allowing user to send file on the main channel. |
 | **in work...** | ...
-
-## Prerequisites
-Before running the project, make sure you have the following installed:
-
-- [None]()
 
 ## Usage
 *Starting server :*
@@ -25,11 +24,15 @@ Before running the project, make sure you have the following installed:
 
 *Starting client :*
 - Download and run ComLan.
-- Username : Set a custom name, if empty session username will be used.
+- Username : Set a custom name. *(if empty session username will be used.)*
 - ServerIP : Put the ip of the PC running ComlanServer.
-- ServerPort : Set the server's listening port. (by default 8888)
+- ServerPort : Set the server's listening port. *(by default 8888)*
+- Aes Key : Set the 32 char Key used to encrypt/Decrypt the message. *(If empty a predefined key will be used.)*
+
+![login]()
+  
 - Click connect.
-- If all right the channel show "Server connexion : OK." 
+- If all right, the channel show "Server connexion : OK." 
 
 ## Contributing
 Contributions are welcome! To contribute to this project, please follow these steps:
@@ -48,4 +51,5 @@ If you encounter any issues or have suggestions for improving the project, pleas
 This project is licensed under the [MIT]. See the [LICENSE](./LICENSE) file for more details.
 
 ## Contributors
-**[Miiraak](https://github.com/miiraak)** - *Lead Developer*
+- **[Miiraak](https://github.com/miiraak)** - *Lead Developer*
+- **[Doncadavona](https://gist.github.com/doncadavona)** - for the [Aes-256-Cbc](https://gist.github.com/doncadavona/19bf1423daf2790276dc0a823cd8c579)
