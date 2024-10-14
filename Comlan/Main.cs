@@ -11,24 +11,22 @@ namespace Comlan
         private static TcpClient? _client;
         private static NetworkStream? _stream;
         private static string? Username { get; set; }
+        private static string AESkey = "cM95jd3wAI5ot7SJ76HisAKR3NuaAEhj";
 
         /// <summary>
         /// The main form of the application. It initializes the components, starts the connection to the server, and starts a thread to receive messages.
         /// </summary>
-        public Main(string serverIP, int serverPort, string username = null)
+        public Main(string serverIP, int serverPort, string Key, string username = null)
         {
             InitializeComponent();
 
-            if (username != null)
-            {
-                Username = username;
-            }
-            else
-            {
-                Username = Environment.UserName;
-            }
+            if (Key != string.Empty)
+                AESkey = Key;
+
+            Username = username != null ? "@" + username : "@" + Environment.UserName;
 
             _client = new TcpClient();
+
             try
             {
                 _client.Connect(serverIP, serverPort);
@@ -43,13 +41,12 @@ namespace Comlan
                 }
                 else
                 {
-                    AppendMessage("Cannot join the server.");
+                    MessageBox.Show("Connexion Error : Server not found.", "Comlan - Error");
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Connexion Error : " + ex.Message, "Comlan - Error");
-                this.Close();
             }
         }
 
@@ -68,12 +65,17 @@ namespace Comlan
                     {
                         string message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
 
+                        if (!message.StartsWith('@'))
+                        {
+                            message = Aes256CbcEncrypt.Decrypt(message, AESkey);
+                        }
+
                         AppendMessage(message);
                     }
                 }
                 catch (Exception ex)
                 {
-                    //MessageBox.Show("Error when receiving message : " + ex.Message, "Comlan - Error");
+                    Console.WriteLine("Error when receiving message : " + ex.Message, "Comlan - Error");
                     break;
                 }
             }
@@ -107,7 +109,8 @@ namespace Comlan
                 try
                 {
                     string message = Username + ": " + TextBoxWrite.Text;
-                    byte[] data = Encoding.UTF8.GetBytes(message);
+                    string EncryptedMessage = Aes256CbcEncrypt.Encrypt(message, AESkey);
+                    byte[] data = Encoding.UTF8.GetBytes(EncryptedMessage);
 
                     if (_stream != null)
                     {
@@ -167,7 +170,7 @@ namespace Comlan
         /// <param name="e"></param>
         private void buttonMinimize_Click(object sender, EventArgs e)
         {
-            Main.ActiveForm.WindowState = FormWindowState.Minimized;   
+            Main.ActiveForm.WindowState = FormWindowState.Minimized;
         }
     }
 }

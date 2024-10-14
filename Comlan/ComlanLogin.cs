@@ -9,19 +9,29 @@
 
         private void ButtonConnect_Click(object sender, EventArgs e)
         {
-            if (textBoxUsername.Text.Trim() == string.Empty)
+            if (textBoxServerIP.Text.Trim() != string.Empty)
             {
-                Form Main = new Main(textBoxServerIP.Text, Convert.ToInt16(textBoxServerPort.Text));
-                this.Hide();
-                Main.ShowDialog();
-                this.Close();
+                if (textBoxServerPort.Text.Trim() != string.Empty)
+                {
+                    if (textBoxUsername.Text.Trim() == string.Empty)
+                    {
+                        Form Main = new Main(textBoxServerIP.Text.Trim(), Convert.ToInt16(textBoxServerPort.Text.Trim()), textBoxAesKey.Text.Trim());
+                        this.Hide();
+                        Main.ShowDialog();
+                        this.Close();
+                    }
+                    else
+                    {
+                        Form Main = new Main(textBoxServerIP.Text.Trim(), Convert.ToInt16(textBoxServerPort.Text.Trim()), textBoxAesKey.Text.Trim(), textBoxUsername.Text);
+                        this.Hide();
+                        Main.ShowDialog();
+                        this.Close();
+                    }
+                }
             }
             else
             {
-                Form Main = new Main(textBoxServerIP.Text, Convert.ToInt16(textBoxServerPort.Text), textBoxUsername.Text);
-                this.Hide();
-                Main.ShowDialog();
-                this.Close();
+                MessageBox.Show("Please check your entries.", "Comlan - Error");
             }
         }
 
