@@ -1,5 +1,7 @@
 # ComLan
 
+![channel]()
+
 ## Description
 ComLan is a small portable lan communication client.
 *Need to have a ComlanServer running on the network.*
@@ -26,6 +28,9 @@ ComLan is a small portable lan communication client.
 - ServerIP : Put the ip of the PC running ComlanServer.
 - ServerPort : Set the server's listening port. *(by default 8888)*
 - Aes Key : Set the 32 char Key used to encrypt/Decrypt the message. *(If empty a predefined key will be used.)*
+
+![login]()
+  
 - Click connect.
 - If all right, the channel show "Server connexion : OK." 
 
