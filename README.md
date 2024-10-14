@@ -53,3 +53,4 @@ This project is licensed under the [MIT]. See the [LICENSE](./LICENSE) file for 
 ## Contributors
 - **[Miiraak](https://github.com/miiraak)** - *Lead Developer*
 - **[Doncadavona](https://gist.github.com/doncadavona)** - for the [Aes-256-Cbc](https://gist.github.com/doncadavona/19bf1423daf2790276dc0a823cd8c579)
+- *Others* - Look in **[Attribution](/.github/Attribution_Links.md)**
