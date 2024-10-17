@@ -11,11 +11,13 @@ ComLan is a small portable lan communication client.
 - **Encrypted communication**: Encrypted communication with Aes-256-Cbc. Use a default key. This can be change at login.
 - ...
 
-### Features in development
-|||
+### In Dev/Idea
+|Label :|Desc :|
 |---|---|
-| **Secure communication** | To secure the communication between users. | 
+| **Secure communication** | To secure the communication between cli/server by adding SSL. | 
 | **Sending files** | Allowing user to send file on the main channel. |
+| **Multi-Channel** | Let user create channel with other servers or clients. |
+| **Connected user list**| Allow user to see who is connected to the server and create channel with choosen ones. |
 | **in work...** | ...
 
 ## Usage
