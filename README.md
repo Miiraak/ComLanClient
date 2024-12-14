@@ -27,8 +27,8 @@ ComLan is a small portable lan communication client.
 *Starting client :*
 - Download and run ComLan.
 - Username : Set a custom name. *(if empty session username will be used.)*
-- ServerIP : Put the ip of the PC running ComlanServer.
-- ServerPort : Set the server's listening port. *(by default 8888)*
+- ServerIP : Put the ip show in ComlanServer GUI.
+- ServerPort : Set the server's listening port show in ComlanServer GUI. *(by default 8888)*
 - Aes Key : Set the 32 char Key used to encrypt/Decrypt the message. *(If empty a predefined key will be used.)*
 
 ![login](/.github/Images/Login.png)
@@ -40,9 +40,10 @@ ComLan is a small portable lan communication client.
 If you encounter any issues or have suggestions for improving the project, please use the [GitHub issue tracker](https://github.com/Miiraak/ComlanClient/issues).
 
 ## License
-This project is licensed under the [MIT]. See the [LICENSE](./LICENSE) file for more details.
+This project is licensed under the MIT. See the [LICENSE](./LICENSE) file for more details.
 
 ## Contributors
 - **[Miiraak](https://github.com/miiraak)** - *Lead Developer*
 - **[Doncadavona](https://gist.github.com/doncadavona)** - for the [Aes-256-Cbc](https://gist.github.com/doncadavona/19bf1423daf2790276dc0a823cd8c579)
+- **[Elimad](https://stackoverflow.com/users/2745573/elimad)** - for the [Borderless movable form](https://stackoverflow.com/questions/1592876/make-a-borderless-form-movable)
 - *Others* - Look in **[Attribution](/.github/Attribution_Links.md)**
