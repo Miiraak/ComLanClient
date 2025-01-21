@@ -5,6 +5,21 @@ namespace Comlan
 {
     public partial class Main : Form
     {
+        /// <summary>
+        /// Method to allow the form to be moved by clicking on main form.
+        /// Thanks to : elimad at https://stackoverflow.com/questions/1592876/make-a-borderless-form-movable
+        /// </summary>
+        /// <param name="m"></param>
+        protected override void WndProc(ref Message m)
+        {
+            base.WndProc(ref m);
+            if (m.Msg == WM_NCHITTEST)
+                m.Result = (IntPtr)(HT_CAPTION);
+        }
+        private const int WM_NCHITTEST = 0x84;
+        private const int HT_CLIENT = 0x1;
+        private const int HT_CAPTION = 0x2;
+
         /// <summary>                              
         /// Required designer variable.
         /// </summary>
@@ -20,7 +35,7 @@ namespace Comlan
         {
             InitializeComponent();
 
-            if (Key != string.Empty)
+            if (Key != string.Empty)                                                    
                 AESkey = Key;
 
             Username = username != null ? "@" + username : "@" + Environment.UserName;
@@ -109,8 +124,12 @@ namespace Comlan
                 try
                 {
                     string message = Username + ": " + TextBoxWrite.Text;
-                    string EncryptedMessage = Aes256CbcEncrypt.Encrypt(message, AESkey);
-                    byte[] data = Encoding.UTF8.GetBytes(EncryptedMessage);
+                    if (AESkey != string.Empty)
+                    {
+                        message = Aes256CbcEncrypt.Encrypt(message, AESkey);
+                    }
+
+                    byte[] data = Encoding.UTF8.GetBytes(message);
 
                     if (_stream != null)
                     {
