@@ -41,6 +41,8 @@
             // richTextBoxChannel
             // 
             richTextBoxChannel.Enabled = false;
+            richTextBoxChannel.HideSelection = false;
+            richTextBoxChannel.ImeMode = ImeMode.Disable;
             richTextBoxChannel.Location = new Point(12, 42);
             richTextBoxChannel.Name = "richTextBoxChannel";
             richTextBoxChannel.ReadOnly = true;

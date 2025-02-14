@@ -1,4 +1,6 @@
-﻿namespace Comlan
+﻿using System.Text.RegularExpressions;
+
+namespace Comlan
 {
     public partial class ComlanLogin : Form
     {
@@ -24,39 +26,48 @@
 
         private void ButtonConnect_Click(object sender, EventArgs e)
         {
-            if (textBoxServerIP.Text.Trim() != string.Empty)
+            try
             {
-                if (textBoxServerPort.Text.Trim() != string.Empty)
+                if (ValidateIP(textBoxServerIP.Text))
                 {
-                    if (textBoxUsername.Text.Trim() == string.Empty)
+                    if (Convert.ToInt16(textBoxServerPort.Text) > 0 && Convert.ToInt32(textBoxServerPort.Text) <= 65535)
                     {
-                        Form Main = new Main(textBoxServerIP.Text.Trim(), Convert.ToInt16(textBoxServerPort.Text.Trim()), textBoxAesKey.Text.Trim());
-                        this.Hide();
-                        Main.ShowDialog();
-                        this.Close();
-                    }
-                    else
-                    {
-                        Form Main = new Main(textBoxServerIP.Text.Trim(), Convert.ToInt16(textBoxServerPort.Text.Trim()), textBoxAesKey.Text.Trim(), textBoxUsername.Text);
-                        this.Hide();
-                        Main.ShowDialog();
-                        this.Close();
+                        if (textBoxUsername.Text.Trim() == string.Empty)
+                        {
+                            Form Main = new Main(textBoxServerIP.Text.Trim(), Convert.ToInt16(textBoxServerPort.Text.Trim()), textBoxAesKey.Text.Trim());
+                            this.Hide();
+                            Main.ShowDialog();
+                            this.Close();
+                        }
+                        else
+                        {
+                            Form Main = new Main(textBoxServerIP.Text.Trim(), Convert.ToInt16(textBoxServerPort.Text.Trim()), textBoxAesKey.Text.Trim(), textBoxUsername.Text);
+                            this.Hide();
+                            Main.ShowDialog();
+                            this.Close();
+                        }
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Please check your entries.", "Comlan - Error");
+                    MessageBox.Show("Invalid IP address.", "Comlan - Error");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Please check your entries.", "Comlan - Error");
+                MessageBox.Show(ex.Message, "Comlan - Error");
             }
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private bool ValidateIP(string ipaddr)
+        {
+            Regex validateIPv4Regex = new Regex("^(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
+            return validateIPv4Regex.IsMatch(ipaddr);
         }
     }
 

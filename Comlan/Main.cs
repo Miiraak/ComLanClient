@@ -20,7 +20,7 @@ namespace Comlan
         private const int HT_CLIENT = 0x1;
         private const int HT_CAPTION = 0x2;
 
-        /// <summary>                              
+        /// <summary>                             
         /// Required designer variable.
         /// </summary>
         private static TcpClient? _client;
@@ -31,7 +31,7 @@ namespace Comlan
         /// <summary>
         /// The main form of the application. It initializes the components, starts the connection to the server, and starts a thread to receive messages.
         /// </summary>
-        public Main(string serverIP, int serverPort, string Key, string username = null)
+        public Main(string serverIP, int serverPort, string Key, string? username = null)
         {
             InitializeComponent();
 
@@ -41,6 +41,7 @@ namespace Comlan
             Username = username != null ? "@" + username : "@" + Environment.UserName;
 
             _client = new TcpClient();
+
 
             try
             {
@@ -104,11 +105,11 @@ namespace Comlan
         {
             if (richTextBoxChannel.InvokeRequired)
             {
-                richTextBoxChannel.Invoke(new Action(() => richTextBoxChannel.AppendText(message + Environment.NewLine)));
+                richTextBoxChannel.Invoke(new Action(() => richTextBoxChannel.AppendText(message + Environment.NewLine + Environment.NewLine)));
             }
             else
             {
-                richTextBoxChannel.AppendText(message + Environment.NewLine);
+                richTextBoxChannel.AppendText(message + Environment.NewLine + Environment.NewLine);
             }
         }
 
