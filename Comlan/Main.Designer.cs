@@ -94,7 +94,7 @@
             label2.Name = "label2";
             label2.Size = new Size(160, 22);
             label2.TabIndex = 7;
-            label2.Text = "ComLan - v1.3.5";
+            label2.Text = "ComLan - v1.3.6";
             // 
             // buttonClose
             // 
@@ -134,6 +134,7 @@
             buttonLogout.TabIndex = 100;
             buttonLogout.TabStop = false;
             buttonLogout.UseVisualStyleBackColor = true;
+            buttonLogout.Click += buttonLogout_Click;
             // 
             // Main
             // 

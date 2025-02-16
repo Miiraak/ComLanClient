@@ -69,7 +69,7 @@ namespace Comlan
         private void ReceiveMessages()
         {
             byte[] buffer = new byte[4096];
-            while (true)
+            while (true)                                                                        
             {
                 try
                 {
@@ -169,6 +169,14 @@ namespace Comlan
         private void ButtonMinimize_Click(object sender, EventArgs e)
         {
             Main.ActiveForm.WindowState = FormWindowState.Minimized;
+        }
+
+        private void buttonLogout_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form ComlanLogin = new ComlanLogin();
+            ComlanLogin.ShowDialog();
+            ButtonClose_Click(sender, e);
         }
     }
 }
