@@ -1,7 +1,8 @@
 # ComLan
-
-![channel](/.github/Images/channel.png)
-
+<p align="center">
+  <img src="/.github/Images/channel.png">
+</p>
+  
 ## Description
 ComLan is a small portable lan communication client.
 *Need to have a ComlanServer running on the network.*

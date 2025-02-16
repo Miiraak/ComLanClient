@@ -6,7 +6,7 @@ namespace Comlan
     public partial class Main : Form
     {
         /// <summary>
-        /// Method to allow the form to be moved by clicking on main form.
+        /// Method to allow the form to be moved on borderless form.
         /// Thanks to : elimad at https://stackoverflow.com/questions/1592876/make-a-borderless-form-movable
         /// </summary>
         /// <param name="m"></param>
@@ -20,7 +20,7 @@ namespace Comlan
         private const int HT_CLIENT = 0x1;
         private const int HT_CAPTION = 0x2;
 
-        /// <summary>                              
+        /// <summary>                             
         /// Required designer variable.
         /// </summary>
         private static TcpClient? _client;
@@ -31,11 +31,11 @@ namespace Comlan
         /// <summary>
         /// The main form of the application. It initializes the components, starts the connection to the server, and starts a thread to receive messages.
         /// </summary>
-        public Main(string serverIP, int serverPort, string Key, string username = null)
+        public Main(string serverIP, int serverPort, string Key, string? username = null)
         {
             InitializeComponent();
 
-            if (Key != string.Empty)                                                    
+            if (Key != string.Empty)
                 AESkey = Key;
 
             Username = username != null ? "@" + username : "@" + Environment.UserName;
@@ -55,9 +55,7 @@ namespace Comlan
                     receiveThread.Start();
                 }
                 else
-                {
                     MessageBox.Show("Connexion Error : Server not found.", "Comlan - Error");
-                }
             }
             catch (Exception ex)
             {
@@ -81,9 +79,7 @@ namespace Comlan
                         string message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
 
                         if (!message.StartsWith('@'))
-                        {
                             message = Aes256CbcEncrypt.Decrypt(message, AESkey);
-                        }
 
                         AppendMessage(message);
                     }
@@ -103,13 +99,9 @@ namespace Comlan
         private void AppendMessage(string message)
         {
             if (richTextBoxChannel.InvokeRequired)
-            {
-                richTextBoxChannel.Invoke(new Action(() => richTextBoxChannel.AppendText(message + Environment.NewLine)));
-            }
+                richTextBoxChannel.Invoke(new Action(() => richTextBoxChannel.AppendText(message + Environment.NewLine + Environment.NewLine)));
             else
-            {
-                richTextBoxChannel.AppendText(message + Environment.NewLine);
-            }
+                richTextBoxChannel.AppendText(message + Environment.NewLine + Environment.NewLine);
         }
 
         /// <summary>
@@ -125,9 +117,7 @@ namespace Comlan
                 {
                     string message = Username + ": " + TextBoxWrite.Text;
                     if (AESkey != string.Empty)
-                    {
                         message = Aes256CbcEncrypt.Encrypt(message, AESkey);
-                    }
 
                     byte[] data = Encoding.UTF8.GetBytes(message);
 
@@ -137,9 +127,7 @@ namespace Comlan
                         TextBoxWrite.Text = "";
                     }
                     else
-                    {
                         throw new Exception("Network stream is null.");
-                    }
                 }
                 catch (Exception ex)
                 {
@@ -147,9 +135,7 @@ namespace Comlan
                 }
             }
             else
-            {
                 MessageBox.Show("Please enter a message.", "Comlan - Error");
-            }
         }
 
         /// <summary>
@@ -167,17 +153,10 @@ namespace Comlan
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void buttonClose_Click(object sender, EventArgs e)
+        private void ButtonClose_Click(object sender, EventArgs e)
         {
-            if (_stream != null)
-            {
-                _stream.Close();
-            }
-
-            if (_client != null)
-            {
-                _client.Close();
-            }
+            _stream?.Close();
+            _client?.Close();
 
             this.Close();
         }
@@ -187,7 +166,7 @@ namespace Comlan
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void buttonMinimize_Click(object sender, EventArgs e)
+        private void ButtonMinimize_Click(object sender, EventArgs e)
         {
             Main.ActiveForm.WindowState = FormWindowState.Minimized;
         }

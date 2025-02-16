@@ -108,7 +108,7 @@
             buttonClose.TabIndex = 100;
             buttonClose.Text = "Close";
             buttonClose.UseVisualStyleBackColor = true;
-            buttonClose.Click += buttonClose_Click;
+            buttonClose.Click += ButtonClose_Click;
             // 
             // label4
             // 
@@ -168,7 +168,9 @@
             Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.None;
             MaximizeBox = false;
+            MaximumSize = new Size(234, 210);
             MinimizeBox = false;
+            MinimumSize = new Size(234, 210);
             Name = "ComlanLogin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ConnexionForm";

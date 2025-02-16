@@ -1,4 +1,7 @@
-﻿namespace Comlan
+﻿using System.Net.Sockets;
+using System.Text.RegularExpressions;
+
+namespace Comlan
 {
     public partial class ComlanLogin : Form
     {
@@ -8,7 +11,7 @@
         }
 
         /// <summary>
-        /// Method to allow the form to be moved by clicking on the title bar.
+        /// Method to allow the form to be moved on borderless form.
         /// Thanks to : elimad at https://stackoverflow.com/questions/1592876/make-a-borderless-form-movable
         /// </summary>
         /// <param name="m"></param>
@@ -24,39 +27,65 @@
 
         private void ButtonConnect_Click(object sender, EventArgs e)
         {
-            if (textBoxServerIP.Text.Trim() != string.Empty)
+            try
             {
-                if (textBoxServerPort.Text.Trim() != string.Empty)
+                if (Convert.ToUInt16(textBoxServerPort.Text) >= 0 && Convert.ToUInt16(textBoxServerPort.Text) <= 65535)
                 {
-                    if (textBoxUsername.Text.Trim() == string.Empty)
+                    if (ValidateIP(textBoxServerIP.Text))
                     {
-                        Form Main = new Main(textBoxServerIP.Text.Trim(), Convert.ToInt16(textBoxServerPort.Text.Trim()), textBoxAesKey.Text.Trim());
-                        this.Hide();
-                        Main.ShowDialog();
-                        this.Close();
+                        if (TestConnection(textBoxServerIP.Text, Convert.ToUInt16(textBoxServerPort.Text)))
+                        {
+                            if (string.IsNullOrEmpty(textBoxUsername.Text))
+                                textBoxUsername.Text = Environment.UserName;
+                            Form Main = new Main(textBoxServerIP.Text.Trim(), Convert.ToUInt16(textBoxServerPort.Text.Trim()), textBoxAesKey.Text.Trim(), textBoxUsername.Text);
+                            this.Hide();
+                            Main.ShowDialog();
+                            this.Close();
+                        }
+                        else
+                            MessageBox.Show("Connexion Error : Server not found.", "Comlan - Error");
                     }
                     else
-                    {
-                        Form Main = new Main(textBoxServerIP.Text.Trim(), Convert.ToInt16(textBoxServerPort.Text.Trim()), textBoxAesKey.Text.Trim(), textBoxUsername.Text);
-                        this.Hide();
-                        Main.ShowDialog();
-                        this.Close();
-                    }
+                        MessageBox.Show("IP Error : Enter a valid IP address.", "Comlan - Error");
                 }
                 else
-                {
-                    MessageBox.Show("Please check your entries.", "Comlan - Error");
-                }
+                    MessageBox.Show("Port Error : Choose a port between 0 and 65535.", "Comlan - Error");
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Please check your entries.", "Comlan - Error");
+                MessageBox.Show(ex.Message, "Comlan - Error");
             }
         }
 
-        private void buttonClose_Click(object sender, EventArgs e)
+        private void ButtonClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private static bool ValidateIP(string ipaddr)
+        {
+            Regex validateIPv4Regex = new("^(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
+            return validateIPv4Regex.IsMatch(ipaddr);
+        }
+
+        private static bool TestConnection(string serverIp, int port)
+        {
+            try
+            {
+                using TcpClient client = new();
+                var result = client.BeginConnect(serverIp, port, null, null);
+                bool success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(2)); // Timeout de 2 secondes
+
+                if (!success)
+                    return false;
+
+                client.EndConnect(result);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 
