@@ -138,6 +138,18 @@
         vgAThsPH6UEy7QAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="buttonLogout.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAFmSURBVEhL3dVLSgQxFIXhRnB3ohN1D+oWdKpb8Ania+CC
+        VJypK/AxE9TzQQWkK5Vqa+iBn0rXfSR1k5ue/Xsth/VwFe7DR3jvxt6x8ZmktfAYvkfgw3dhLYWDUBI8
+        hZOwHawYxt49Bz5fYT+IHVVJ/hkOw2pYGYDtKPAVY5KmfKrVCNgNtaQ1+IoRa9KqbFapuZXXErU4DmLl
+        qG682nJQ81KWm+65CL6+7IlcPV0HRisRILnf84lanAYxl6Gnh8C4FUryv06wE8TI1ZMGYrztnmPUJtgI
+        bHL19BYYS6nGqE2wGdheQ0+lRJrovBsPJRqiWSJ3C6MO5VwmmU/S4iyIuQg9lWPqqE09pi9Bjuox/d1o
+        2r+WpIUvFzvYaDT1qtgLo1dFkQvLSgRoOpPWkoLNyvmKGb3syJXL0WoE2RMd6oSoLYxt6KTrusinlj1p
+        wWe0LEOyWVZc/jJ1KO6C+4ZtcEP/g2azH6x/vpTKI1zlAAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAAAAAAAEAGAAIIQMAFgAAACgAAAAAAQAAAAIAAAEAGAAAAAAAAAADAAAAAAAAAAAAAAAAAAAA
