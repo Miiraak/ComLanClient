@@ -40,9 +40,7 @@
             // 
             // richTextBoxChannel
             // 
-            richTextBoxChannel.Enabled = false;
             richTextBoxChannel.HideSelection = false;
-            richTextBoxChannel.ImeMode = ImeMode.Disable;
             richTextBoxChannel.Location = new Point(12, 42);
             richTextBoxChannel.Name = "richTextBoxChannel";
             richTextBoxChannel.ReadOnly = true;
@@ -109,7 +107,7 @@
             buttonClose.TabIndex = 8;
             buttonClose.TabStop = false;
             buttonClose.UseVisualStyleBackColor = false;
-            buttonClose.Click += buttonClose_Click;
+            buttonClose.Click += ButtonClose_Click;
             // 
             // buttonMinimize
             // 
@@ -122,7 +120,7 @@
             buttonMinimize.TabIndex = 9;
             buttonMinimize.TabStop = false;
             buttonMinimize.UseVisualStyleBackColor = true;
-            buttonMinimize.Click += buttonMinimize_Click;
+            buttonMinimize.Click += ButtonMinimize_Click;
             // 
             // Main
             // 
@@ -145,9 +143,11 @@
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
+            MaximumSize = new Size(410, 420);
             MinimizeBox = false;
+            MinimumSize = new Size(410, 420);
             Name = "Main";
-            StartPosition = FormStartPosition.Manual;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Lan Communication";
             ResumeLayout(false);
             PerformLayout();
