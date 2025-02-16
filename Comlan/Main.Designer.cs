@@ -93,7 +93,7 @@
             label2.Name = "label2";
             label2.Size = new Size(160, 22);
             label2.TabIndex = 7;
-            label2.Text = "ComLan - v1.3.0";
+            label2.Text = "ComLan - v1.3.5";
             // 
             // buttonClose
             // 
