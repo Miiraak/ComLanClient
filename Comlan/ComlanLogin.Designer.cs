@@ -46,6 +46,7 @@
             // 
             textBoxUsername.Location = new Point(12, 62);
             textBoxUsername.Name = "textBoxUsername";
+            textBoxUsername.PlaceholderText = "Empty for session name";
             textBoxUsername.Size = new Size(208, 22);
             textBoxUsername.TabIndex = 0;
             // 
@@ -53,6 +54,7 @@
             // 
             textBoxServerIP.Location = new Point(12, 103);
             textBoxServerIP.Name = "textBoxServerIP";
+            textBoxServerIP.PlaceholderText = "192.168.1.2";
             textBoxServerIP.Size = new Size(132, 22);
             textBoxServerIP.TabIndex = 1;
             // 
@@ -60,6 +62,7 @@
             // 
             textBoxServerPort.Location = new Point(150, 103);
             textBoxServerPort.Name = "textBoxServerPort";
+            textBoxServerPort.PlaceholderText = "8888";
             textBoxServerPort.Size = new Size(70, 22);
             textBoxServerPort.TabIndex = 2;
             // 

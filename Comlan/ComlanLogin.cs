@@ -38,9 +38,10 @@ namespace Comlan
                             if (string.IsNullOrEmpty(textBoxUsername.Text))
                                 textBoxUsername.Text = Environment.UserName;
                             Form Main = new Main(textBoxServerIP.Text.Trim(), Convert.ToUInt16(textBoxServerPort.Text.Trim()), textBoxAesKey.Text.Trim(), textBoxUsername.Text);
-                            this.Hide();
-                            Main.ShowDialog();
-                            this.Close();
+                            Hide();
+                            // show main form and when main form is closed, show login form again
+                            Main.FormClosed += (s, args) => this.Show();
+                            Main.Show();
                         }
                         else
                             MessageBox.Show("Connexion Error : Server not found.", "Comlan - Error");
@@ -55,11 +56,6 @@ namespace Comlan
             {
                 MessageBox.Show(ex.Message, "Comlan - Error");
             }
-        }
-
-        private void ButtonClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private static bool ValidateIP(string ipaddr)
@@ -87,7 +83,9 @@ namespace Comlan
                 return false;
             }
         }
+        private void ButtonClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
-
-
 }

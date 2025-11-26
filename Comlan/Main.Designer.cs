@@ -36,7 +36,6 @@
             label2 = new Label();
             buttonClose = new Button();
             buttonMinimize = new Button();
-            buttonLogout = new Button();
             SuspendLayout();
             // 
             // richTextBoxChannel
@@ -123,19 +122,6 @@
             buttonMinimize.UseVisualStyleBackColor = true;
             buttonMinimize.Click += ButtonMinimize_Click;
             // 
-            // buttonLogout
-            // 
-            buttonLogout.FlatAppearance.BorderSize = 0;
-            buttonLogout.FlatStyle = FlatStyle.Flat;
-            buttonLogout.Image = (Image)resources.GetObject("buttonLogout.Image");
-            buttonLogout.Location = new Point(296, 8);
-            buttonLogout.Name = "buttonLogout";
-            buttonLogout.Size = new Size(30, 30);
-            buttonLogout.TabIndex = 100;
-            buttonLogout.TabStop = false;
-            buttonLogout.UseVisualStyleBackColor = true;
-            buttonLogout.Click += buttonLogout_Click;
-            // 
             // Main
             // 
             AcceptButton = buttonSend;
@@ -145,7 +131,6 @@
             BackColor = SystemColors.ActiveBorder;
             BackgroundImageLayout = ImageLayout.None;
             ClientSize = new Size(410, 420);
-            Controls.Add(buttonLogout);
             Controls.Add(buttonMinimize);
             Controls.Add(buttonClose);
             Controls.Add(label2);
@@ -177,6 +162,5 @@
         private Label label2;
         private Button buttonClose;
         private Button buttonMinimize;
-        private Button buttonLogout;
     }
 }

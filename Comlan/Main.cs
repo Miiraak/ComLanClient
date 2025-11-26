@@ -10,19 +10,17 @@ namespace Comlan
         /// Thanks to : elimad at https://stackoverflow.com/questions/1592876/make-a-borderless-form-movable
         /// </summary>
         /// <param name="m"></param>
+        private const int WM_NCHITTEST = 0x84;
+        private const int HT_CLIENT = 0x1;
+        private const int HT_CAPTION = 0x2;
         protected override void WndProc(ref Message m)
         {
             base.WndProc(ref m);
             if (m.Msg == WM_NCHITTEST)
                 m.Result = (IntPtr)(HT_CAPTION);
         }
-        private const int WM_NCHITTEST = 0x84;
-        private const int HT_CLIENT = 0x1;
-        private const int HT_CAPTION = 0x2;
 
-        /// <summary>                             
-        /// Required designer variable.
-        /// </summary>
+        // Network variables
         private static TcpClient? _client;
         private static NetworkStream? _stream;
         private static string? Username { get; set; }
@@ -41,7 +39,6 @@ namespace Comlan
             Username = username != null ? "@" + username : "@" + Environment.UserName;
 
             _client = new TcpClient();
-
             try
             {
                 _client.Connect(serverIP, serverPort);
@@ -69,7 +66,7 @@ namespace Comlan
         private void ReceiveMessages()
         {
             byte[] buffer = new byte[4096];
-            while (true)                                                                        
+            while (true)
             {
                 try
                 {
@@ -93,15 +90,15 @@ namespace Comlan
         }
 
         /// <summary>
-        /// Method to append a message to the chat.
+        /// Method to append a message to the chat. 
         /// </summary>
         /// <param name="message"></param>
         private void AppendMessage(string message)
         {
-            if (richTextBoxChannel.InvokeRequired)
-                richTextBoxChannel.Invoke(new Action(() => richTextBoxChannel.AppendText(message + Environment.NewLine + Environment.NewLine)));
+            if (richTextBoxChannel.InvokeRequired) // thread safety
+                richTextBoxChannel.Invoke(new Action(() => richTextBoxChannel.AppendText(message + Environment.NewLine + Environment.NewLine))); // Used from another thread
             else
-                richTextBoxChannel.AppendText(message + Environment.NewLine + Environment.NewLine);
+                richTextBoxChannel.AppendText(message + Environment.NewLine + Environment.NewLine); // Used from the same thread
         }
 
         /// <summary>
@@ -111,31 +108,35 @@ namespace Comlan
         /// <param name="e"></param>
         private void ButtonSend_Click(object sender, EventArgs e)
         {
-            if (TextBoxWrite.Text.Trim() != string.Empty)
+            try
             {
-                try
+                if (TextBoxWrite.Text.Trim() != string.Empty)
                 {
                     string message = Username + ": " + TextBoxWrite.Text;
-                    if (AESkey != string.Empty)
-                        message = Aes256CbcEncrypt.Encrypt(message, AESkey);
-
-                    byte[] data = Encoding.UTF8.GetBytes(message);
+                    byte[] data = Encoding.UTF8.GetBytes(Aes256CbcEncrypt.Encrypt(message, AESkey));
 
                     if (_stream != null)
                     {
-                        _stream.Write(data, 0, data.Length);
-                        TextBoxWrite.Text = "";
+                        // avoid sending too large messages
+                        if (data.Length < 4096)
+                        {
+                            _stream.Write(data, 0, data.Length);
+                            TextBoxWrite.Text = "";
+                        }
+                        else
+                            MessageBox.Show("Message is too long to be sent.", "Comlan - Error");
+
                     }
                     else
-                        throw new Exception("Network stream is null.");
+                        MessageBox.Show("Not connected to the server.", "Comlan - Error");
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error when sending message : " + ex.Message, "Comlan - Error");
-                }
+                else
+                    MessageBox.Show("Please enter a message.", "Comlan - Error");
             }
-            else
-                MessageBox.Show("Please enter a message.", "Comlan - Error");
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error when sending message : " + ex.Message, "Comlan - Error");
+            }
         }
 
         /// <summary>
@@ -149,7 +150,7 @@ namespace Comlan
         }
 
         /// <summary>
-        /// Method to close the connection and the application.
+        /// Method to close the connection and the form.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -162,21 +163,13 @@ namespace Comlan
         }
 
         /// <summary>
-        /// Method to minimize the application.
-        /// </summary>
+        /// Method to minimize the form.
+        /// </summary>w
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void ButtonMinimize_Click(object sender, EventArgs e)
         {
-            Main.ActiveForm.WindowState = FormWindowState.Minimized;
-        }
-
-        private void buttonLogout_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            Form ComlanLogin = new ComlanLogin();
-            ComlanLogin.ShowDialog();
-            ButtonClose_Click(sender, e);
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }

@@ -6,11 +6,11 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <ApplicationIcon>SendButton.ico</ApplicationIcon>
+    <ApplicationIcon>ComlanIcon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="SendButton.ico" />
+    <Content Include="ComlanIcon.ico" />
   </ItemGroup>
 
   <ItemGroup>
