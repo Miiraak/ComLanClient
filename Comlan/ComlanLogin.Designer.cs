@@ -90,9 +90,9 @@
             label2.AutoSize = true;
             label2.Location = new Point(12, 86);
             label2.Name = "label2";
-            label2.Size = new Size(84, 14);
+            label2.Size = new Size(98, 14);
             label2.TabIndex = 200;
-            label2.Text = "Server IP :";
+            label2.Text = "Server IPv4 :";
             // 
             // label3
             // 

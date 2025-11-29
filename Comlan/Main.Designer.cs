@@ -149,6 +149,7 @@
             Name = "Main";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Lan Communication";
+            FormClosing += Main_FormClosing;
             ResumeLayout(false);
             PerformLayout();
         }

@@ -5,11 +5,6 @@ namespace Comlan
 {
     public partial class ComlanLogin : Form
     {
-        public ComlanLogin()
-        {
-            InitializeComponent();
-        }
-
         /// <summary>
         /// Method to allow the form to be moved on borderless form.
         /// Thanks to : elimad at https://stackoverflow.com/questions/1592876/make-a-borderless-form-movable
@@ -23,6 +18,11 @@ namespace Comlan
             base.WndProc(ref m);
             if (m.Msg == WM_NCHITTEST)
                 m.Result = (IntPtr)(HT_CAPTION);
+        }
+
+        public ComlanLogin()
+        {
+            InitializeComponent();
         }
 
         private void ButtonConnect_Click(object sender, EventArgs e)
@@ -90,7 +90,7 @@ namespace Comlan
         }
         private void ButtonClose_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.Exit();
         }
     }
 }

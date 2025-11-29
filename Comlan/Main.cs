@@ -5,26 +5,25 @@ namespace Comlan
 {
     public partial class Main : Form
     {
+        private static TcpClient? _client;
+        private static NetworkStream? _stream;
+        private static string? Username { get; set; }
+        private static string AESkey = "cM95jd3wAI5ot7SJ76HisAKR3NuaAEhj";
+        private const int WM_NCHITTEST = 0x84;
+        private const int HT_CLIENT = 0x1;
+        private const int HT_CAPTION = 0x2;
+
         /// <summary>
         /// Method to allow the form to be moved on borderless form.
         /// Thanks to : elimad at https://stackoverflow.com/questions/1592876/make-a-borderless-form-movable
         /// </summary>
         /// <param name="m"></param>
-        private const int WM_NCHITTEST = 0x84;
-        private const int HT_CLIENT = 0x1;
-        private const int HT_CAPTION = 0x2;
         protected override void WndProc(ref Message m)
         {
             base.WndProc(ref m);
             if (m.Msg == WM_NCHITTEST)
                 m.Result = (IntPtr)(HT_CAPTION);
         }
-
-        // Network variables
-        private static TcpClient? _client;
-        private static NetworkStream? _stream;
-        private static string? Username { get; set; }
-        private static string AESkey = "cM95jd3wAI5ot7SJ76HisAKR3NuaAEhj";
 
         /// <summary>
         /// The main form of the application. It initializes the components, starts the connection to the server, and starts a thread to receive messages.
@@ -150,6 +149,16 @@ namespace Comlan
         }
 
         /// <summary>
+        /// Method to minimize the form.
+        /// </summary>w
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonMinimize_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        /// <summary>
         /// Method to close the connection and the form.
         /// </summary>
         /// <param name="sender"></param>
@@ -162,14 +171,10 @@ namespace Comlan
             this.Close();
         }
 
-        /// <summary>
-        /// Method to minimize the form.
-        /// </summary>w
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonMinimize_Click(object sender, EventArgs e)
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.WindowState = FormWindowState.Minimized;
+            _stream?.Close();
+            _client?.Close();
         }
     }
 }
