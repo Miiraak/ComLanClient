@@ -8,10 +8,10 @@ ComLan is a small portable lan communication client.
 *Need to have a ComlanServer running on the network.*
 
 ## Features
-- **Custom Username**: Possibility to set a custom username or letting empty to use Environment.Username
-- **Encrypted communication**: Encrypted communication with Aes-256-Cbc. Use a default key. This can be change at login.
-- **Logout**: Simple but necessary, logout button added.
-- ...
+- **Custom Username**: Possibility to set a custom username or leave it empty to use Environment.Username.
+- **Encrypted communication**: Encrypted communication with Aes-256-Cbc. Use a default key. This can be changed at login (must be 32 characters).
+- **Clickable Links**: Links shared in the chat are now clickable and open in your default browser.
+- **Session Management**: Close the chat window to return to the login screen and connect to a different server.
 
 ### In Dev/Idea
 |Label :|Desc :|
