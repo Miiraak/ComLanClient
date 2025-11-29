@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
-// Thnaks to Don Cadavona https://gist.github.com/doncadavona
+// Thanks to Don Cadavona https://gist.github.com/doncadavona
 
 namespace Comlan
 {

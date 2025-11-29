@@ -36,7 +36,6 @@
             label2 = new Label();
             buttonClose = new Button();
             buttonMinimize = new Button();
-            buttonLogout = new Button();
             SuspendLayout();
             // 
             // richTextBoxChannel
@@ -49,6 +48,7 @@
             richTextBoxChannel.TabIndex = 99;
             richTextBoxChannel.TabStop = false;
             richTextBoxChannel.Text = "";
+            richTextBoxChannel.LinkClicked += RichTextBoxChannel_LinkClicked;
             // 
             // buttonAddFile
             // 
@@ -94,7 +94,7 @@
             label2.Name = "label2";
             label2.Size = new Size(160, 22);
             label2.TabIndex = 7;
-            label2.Text = "ComLan - v1.3.6";
+            label2.Text = "ComLan - v1.3.7";
             // 
             // buttonClose
             // 
@@ -123,19 +123,6 @@
             buttonMinimize.UseVisualStyleBackColor = true;
             buttonMinimize.Click += ButtonMinimize_Click;
             // 
-            // buttonLogout
-            // 
-            buttonLogout.FlatAppearance.BorderSize = 0;
-            buttonLogout.FlatStyle = FlatStyle.Flat;
-            buttonLogout.Image = (Image)resources.GetObject("buttonLogout.Image");
-            buttonLogout.Location = new Point(296, 8);
-            buttonLogout.Name = "buttonLogout";
-            buttonLogout.Size = new Size(30, 30);
-            buttonLogout.TabIndex = 100;
-            buttonLogout.TabStop = false;
-            buttonLogout.UseVisualStyleBackColor = true;
-            buttonLogout.Click += buttonLogout_Click;
-            // 
             // Main
             // 
             AcceptButton = buttonSend;
@@ -145,7 +132,6 @@
             BackColor = SystemColors.ActiveBorder;
             BackgroundImageLayout = ImageLayout.None;
             ClientSize = new Size(410, 420);
-            Controls.Add(buttonLogout);
             Controls.Add(buttonMinimize);
             Controls.Add(buttonClose);
             Controls.Add(label2);
@@ -164,6 +150,7 @@
             Name = "Main";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Lan Communication";
+            FormClosing += Main_FormClosing;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -177,6 +164,5 @@
         private Label label2;
         private Button buttonClose;
         private Button buttonMinimize;
-        private Button buttonLogout;
     }
 }

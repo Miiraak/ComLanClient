@@ -5,25 +5,25 @@ namespace Comlan
 {
     public partial class ComlanLogin : Form
     {
-        public ComlanLogin()
-        {
-            InitializeComponent();
-        }
-
         /// <summary>
         /// Method to allow the form to be moved on borderless form.
         /// Thanks to : elimad at https://stackoverflow.com/questions/1592876/make-a-borderless-form-movable
         /// </summary>
         /// <param name="m"></param>
+        private const int WM_NCHITTEST = 0x84;
+        private const int HT_CLIENT = 0x1;
+        private const int HT_CAPTION = 0x2;
         protected override void WndProc(ref Message m)
         {
             base.WndProc(ref m);
             if (m.Msg == WM_NCHITTEST)
                 m.Result = (IntPtr)(HT_CAPTION);
         }
-        private const int WM_NCHITTEST = 0x84;
-        private const int HT_CLIENT = 0x1;
-        private const int HT_CAPTION = 0x2;
+
+        public ComlanLogin()
+        {
+            InitializeComponent();
+        }
 
         private void ButtonConnect_Click(object sender, EventArgs e)
         {
@@ -33,17 +33,23 @@ namespace Comlan
                 {
                     if (ValidateIP(textBoxServerIP.Text))
                     {
-                        if (TestConnection(textBoxServerIP.Text, Convert.ToUInt16(textBoxServerPort.Text)))
+                        if (textBoxAesKey.Text.Length == 32 || textBoxAesKey.Text.Length == 0)
                         {
-                            if (string.IsNullOrEmpty(textBoxUsername.Text))
-                                textBoxUsername.Text = Environment.UserName;
-                            Form Main = new Main(textBoxServerIP.Text.Trim(), Convert.ToUInt16(textBoxServerPort.Text.Trim()), textBoxAesKey.Text.Trim(), textBoxUsername.Text);
-                            this.Hide();
-                            Main.ShowDialog();
-                            this.Close();
+                            if (TestConnection(textBoxServerIP.Text, Convert.ToUInt16(textBoxServerPort.Text)))
+                            {
+                                if (string.IsNullOrEmpty(textBoxUsername.Text))
+                                    textBoxUsername.Text = Environment.UserName;
+                                Form Main = new Main(textBoxServerIP.Text.Trim(), Convert.ToUInt16(textBoxServerPort.Text.Trim()), textBoxAesKey.Text.Trim(), textBoxUsername.Text);
+                                Hide();
+                                // show main form and when main form is closed, show login form again
+                                Main.FormClosed += (s, args) => this.Show();
+                                Main.Show();
+                            }
+                            else
+                                MessageBox.Show("Connexion Error : Server not found.", "Comlan - Error");
                         }
                         else
-                            MessageBox.Show("Connexion Error : Server not found.", "Comlan - Error");
+                            MessageBox.Show("AES Key Error : The AES key must be 32 characters long. Or empty", "Comlan - Error");
                     }
                     else
                         MessageBox.Show("IP Error : Enter a valid IP address.", "Comlan - Error");
@@ -55,11 +61,6 @@ namespace Comlan
             {
                 MessageBox.Show(ex.Message, "Comlan - Error");
             }
-        }
-
-        private void ButtonClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private static bool ValidateIP(string ipaddr)
@@ -87,7 +88,9 @@ namespace Comlan
                 return false;
             }
         }
+        private void ButtonClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
-
-
 }
