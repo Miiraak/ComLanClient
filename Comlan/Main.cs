@@ -176,5 +176,14 @@ namespace Comlan
             _stream?.Close();
             _client?.Close();
         }
+
+        private void RichTextBoxChannel_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = e.LinkText,
+                UseShellExecute = true
+            });
+        }
     }
 }

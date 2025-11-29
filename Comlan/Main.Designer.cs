@@ -48,6 +48,7 @@
             richTextBoxChannel.TabIndex = 99;
             richTextBoxChannel.TabStop = false;
             richTextBoxChannel.Text = "";
+            richTextBoxChannel.LinkClicked += RichTextBoxChannel_LinkClicked;
             // 
             // buttonAddFile
             // 
