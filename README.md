@@ -1,6 +1,6 @@
 # ComLan  | [![CodeQL](https://github.com/Miiraak/ComLanClient/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Miiraak/ComLanClient/actions/workflows/github-code-scanning/codeql)
 <p align="center">
-  <img src="/.github/Images/channel.png">
+  <img src="/.github/Images/Channel.png">
 </p>
   
 ## Description
